@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,15 +25,18 @@ import com.example.demo.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@CrossOrigin
 @Slf4j
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class UserController {
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private TokenProvider tokenProvider;
+	
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO){
@@ -77,21 +83,6 @@ public class UserController {
 		
 	}
 	
-	
-	 @GetMapping(value = "/{socialLoginType}")
-	    public void socialLoginType(
-	            @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType) {
-			log.info(">> 사용자로부터 SNS 로그인 요청을 받음 :: {} Social Login", socialLoginType);
-	       // OauthService.request(socialLoginType);
-	    }
- 
-	  @GetMapping(value = "/{socialLoginType}/callback")
-	    public String callback(
-	            @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType,
-	            @RequestParam(name = "code") String code) {
-	        log.info(">> 소셜 로그인 API 서버로부터 받은 code :: {}", code);
-	        return "";
-	    }
 	
 	
 	

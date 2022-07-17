@@ -1,5 +1,8 @@
 package com.example.demo.persistence;
 
+import com.example.demo.SocialLog.GoogleOauth;
+import com.example.demo.config.SocialLoginType;
+
 public interface SocialOauth {
 
 	
@@ -8,4 +11,7 @@ public interface SocialOauth {
      * 사용자로부터 로그인 요청을 받아 Social Login Server 인증용 code 요청
      */
     String getOauthRedirectURL();
+    
+ 
+    
 }

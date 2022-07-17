@@ -33,7 +33,7 @@ import com.example.demo.service.EmbService;
 import lombok.extern.slf4j.Slf4j;
 
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("travinfo")
 @Slf4j
@@ -53,7 +53,7 @@ public class ApiController {
 	
 	
 	
-	@CrossOrigin(origins="http://localhost:3000/")
+	//@CrossOrigin(origins="http://localhost:3000/")
 	@GetMapping("/embinfo")
 	public ArrayList<EmbDTO> apitest(){	
 		 List<EmbDTO> embtest = service2.list();
@@ -175,7 +175,7 @@ public class ApiController {
 	
 	static ArrayList<CorDTO> worldcor = new ArrayList<CorDTO>();
 	
-	@CrossOrigin(origins="http://localhost:3000/") //리액트 연결했을때 코스 오리진 오류 해결
+	//@CrossOrigin(origins="http://localhost:3000/") //리액트 연결했을때 코스 오리진 오류 해결
 	@GetMapping("/worcorinfo")
 	public ArrayList<CorDTO> apitest2(){
 		
