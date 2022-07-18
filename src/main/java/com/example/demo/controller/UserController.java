@@ -1,12 +1,16 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,6 +88,36 @@ public class UserController {
 	}
 	
 	
+	@PostMapping("/update")
+	public ResponseEntity<?> modify(@RequestBody UserEntity userEntity,UserDTO userDTO){
+		UserEntity user = userService.modify(userEntity);
+		
+		
+		return null;
+	}
+	
+	
+	/*
+	@DeleteMapping("/delete")
+	public void delete(@RequestBody UserDTO dto ){
+		try {	
+			  UserEntity entity = UserDTO.usEntity(dto);
+			  System.out.println(entity);			  			  
+			  userService.delete(entity);
+			 		
+		}catch(Exception e) {
+			
+		}
+	}*/
+	
+	
+	@DeleteMapping("/delete/{email}")
+	public void delete2(@PathVariable String email){
+		userService.delete2(email);
+		//프론트에서 특정 버튼을 누르면 여기로 리다이렉트 되게 하면될듯
+		
+	}
+
 	
 	
 }
