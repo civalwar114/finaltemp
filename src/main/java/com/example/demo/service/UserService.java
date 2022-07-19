@@ -41,12 +41,7 @@ public class UserService {
 		
 	}
 	
-	public UserEntity modify(final UserEntity userEntity) {
-		// 회원수정
-		
-		
-		return null;
-	}
+
 	
 	
 	
@@ -91,6 +86,30 @@ public class UserService {
 		
 	}
 	
+	
+	@Transactional
+	public UserEntity modify(final UserEntity entity) {
+		//final Optional<UserEntity> original = userRepository.findByEmail(entity.getEmail());
+	
+		
+		final UserEntity user = userRepository.findByEmail(entity.getEmail());
+		
+		user.setPassword(entity.getPassword());
+		user.setPhone(entity.getPhone());
+		user.setEngname(entity.getEngname());
+		user.setKorname(entity.getKorname());
+		user.setUsername(entity.getUsername());
+		
+		
+		userRepository.save(user);
+		//이메일(아이디)로 유저를 확인
+		//확인된 유저의 정보를 불러오기
+		//비밀번호,전화번호,한국이름,영문이름 을 수정할 수 있게 받기
+		// 이를 덮어 씌우고 리다이렉트
+		
+		return user;
+	
+	}
 	
 	
 	
